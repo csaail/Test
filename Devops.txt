@@ -1,0 +1,496 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Practical 1. A: 2D Linear Convolution
+x = [1,2,3;4,5,6;7,8,9];
+h = [1;1;1];
+y = conv2(x,h);
+disp("Saail Chavan 016");
+disp(y,"Linear Convolution results");
+
+Practical 1. B: 2D  Circular Convolution
+x=[1,2;3,4];
+h=[5,6;7,8];
+X = fft2(x); // 2D FFT of x matrix
+H = fft2(h); // 2D FFT of h matrix
+Y = X.*H; // Element by Element multiplication
+y = ifft(Y);
+disp("Saail Chavan 016");
+disp(y,"Circular Convolution Results");
+
+Practical 2. A: 4x4 Gray scale
+f=[1 1 1 1;1 1 1 1;1 1 1 1;1 1 1 1];
+t = fft2(f);
+disp("Saail Chavan 016");
+disp(t,"Display");
+
+Practical 2. B:  Compute discrete cosine
+f1=[2,4,4,2;4,6,8,3;2,8,10,4;3,8,6,2];
+disp("Saail Chavan 016");
+F1=dct(f1);
+disp(F1,"Discrete cosine Transformation");
+subplot(221);
+imshow(f1);
+title("Image in spatial domain (Dugesh Pawar 014)");
+subplot(223);
+imshow(F1);
+title("Image in Frequency");
+
+Practical 3. A:  Brightness enhancement
+a = imread("C:\Users\SAAIL\Documents\DIP pracs\cameraman.png");
+f1 = a+50;
+f2 = a+60;
+f3 = a+80;
+subplot(2,2,1);
+imshow(a);
+title("original Image");
+subplot(2,2,2);
+imshow(f1);
+title("Brightness increased by 50");
+subplot(2,2,3);
+imshow(f2);
+title("Brightness increased by 60");
+subplot(2,2,4);
+imshow(f3);
+title("Brightness Increased by 80");
+
+Practical 3. B
+a = imread("C:\Users\SAAIL\Documents\DIP pracs\cameraman.png");
+f1 = a-50;
+f2 = a-60;
+f3 = a-80;
+subplot(2,2,1);
+imshow(a);
+title("original Image");
+subplot(2,2,2);
+imshow(f1);
+title("Brightness Decreased by 50");
+subplot(2,2,3);
+imshow(f2);
+title("Brightness Decreased by 60");
+subplot(2,2,4);
+imshow(f3);
+title("Brightness Decreased by 80");
+
+Practical 4. A
+a = imread("C:\Users\SAAIL\Documents\DIP pracs\lenna.jpg");
+r1 = 100;
+r2 = 140;
+s1 = 150;
+s2 = 240;
+l = s1/r1;
+m = (s2-s1)/(r2-r1);
+n = (255-s2)/(255-r2);
+s = size(a);
+for i = 1:s(1)
+  for j=1:s(2)
+    if ((a(i,j)>0) && (a(i,j)<r1))
+ 	b(i,j) = a(i,j)*1;
+    end
+    if ((a(i,j)>r1) && (a(i,j)<r2))
+        b(i,j) = (m*(a(i,j)-120))+s1;
+    end
+    if ((a(i,j)>r2) && (a(i,j)<256))
+        b(i,j) = (n*(a(i,j)-150))+s2;
+    end
+  end
+end
+subplot(1,2,1),imshow(a),title('Original Image');
+subplot(1,2,2),imshow(b),title('Contrast Image');
+
+Practical 4. B: Image Negative
+a = imread("C:\Users\SAAIL\Documents\DIP pracs\lenna.jpg");
+[rows cols] = size(a);
+disp(rows, 'Rows');
+disp(cols, 'Columns');
+for i =1:rows
+  for j=1:cols
+  r1 = a(i,j);
+  g1 (i,j) = 255 - r1
+  end
+end
+subplot(2,2,1),title('Original Image '), imshow(a);
+subplot(2,2,2),title('Negative Image'),imshow(g1);
+
+Practical 5. A: threshold operation
+a=imread('C:\Users\CG-CS-PC21\Desktop\DIP_Prac\cameraman.jpg');
+[m,n]=size(a);
+for i=1:m
+	for j=1:n
+ 		x=a(i,j);
+ 		if x >= 128
+ 			b(i,j)=255;
+ 		else
+ 			b(i,j)=0;
+
+	 	end
+	end
+end
+subplot(2,2,1),imshow(a),title('Original:Durgesh Pawar');
+subplot(2,2,2),imshow(b),title('Threshold Output');
+
+Practical 5. B:  gray level slicing
+f=imread('C:\Users\SAAIL\Documents\DIP pracs\cameraman.png');
+[m,n] = size(f)
+r1 = 100
+r2 = 200
+for i=1:m
+	for j=1:n
+		r = f(i,j)
+ 		if r >= r1 & r <= r2
+ 			g(i,j) = 255
+ 		else
+ 			g(i,j) = 0
+ 		end
+ 	end
+end
+subplot(2,2,1),title('Original Image'),imshow(f)
+subplot(2,2,2),title('Gray Level Slicing Image'),imshow(g)
+
+Practical 6. A: Log transformation
+f = imread("C:\Users\SAAIL\Documents\DIP pracs\colour8.png");
+[m,n]=size(f);
+for i=1:m
+ 	for j=1:n
+ 		r=f(i,j);
+ 		g(i,j)=20*log(1+double(r));
+ 	end
+end
+subplot(1,2,1),imshow(f),title('Original');
+subplot(1,2,2),imshow(g),title('Log Transform');
+
+Practical 6. B: Power law transformation
+a = imread('C:\Users\SAAIL\Documents\DIP pracs\lenna.jpg');
+[m, n] = size(a);
+b = zeros(m, n);
+c = zeros(m, n);
+d = zeros(m, n);
+for i = 1:m
+	for j = 1:n
+ 		x = double(a(i, j)) / 255;
+ 		b(i, j) = 255 * (x^0.4);
+ 		c(i, j) = 255 * (x^0.6);
+ 		d(i, j) = 255 * (x^0.9);
+ 	end
+end
+b(b > 255) = 255;
+c(c > 255) = 255;
+d(d > 255) = 255;
+subplot(2,2,1), imshow(a), title('Original');
+subplot(2,2,2), imshow(uint8(b)), title('Power Law Transform : Gamma = 0.4');
+subplot(2,2,3), imshow(uint8(c)), title('Power Law Transform : Gamma = 0.6');
+subplot(2,2,4), imshow(uint8(d)), title('Power Law Transform : Gamma = 0.9')
+
+Practical 7. A:  3 images using figure () 
+img1 = imread('C:\Users\SAAIL\Documents\DIP pracs\lenna.jpg');
+img2 = imread('C:\Users\SAAIL\Documents\DIP pracs\colors.jpg');
+img3 = imread('C:\Users\SAAIL\Documents\DIP pracs\butterfly.jpg');
+figure(1);
+title('Image 1');
+imshow(img1);
+figure(2);
+title('Image 2');
+imshow(img2);
+figure(3);
+title('Image 3');
+imshow(img3);
+
+Practical 7. B:  3 images using subplot
+img1 = imread('C:\Users\SAAIL\Documents\DIP pracs\lenna.jpg');
+img2 = imread('C:\Users\SAAIL\Documents\DIP pracs\colors.jpg');
+img3 = imread('C:\Users\SAAIL\Documents\DIP pracs\butterfly.jpg');
+subplot(2,2,1);
+title('Image 1');
+imshow(img1);
+subplot(2,2,2);
+title('Image 2');
+imshow(img2);
+subplot(2,2,3);
+title('Image 3');
+imshow(img3);
+
+Practical 8.A: Image Dilation
+a=imread(path)
+se = testmatrix('square',11);
+ad = imdilate(a,se);
+subplot(1,2,1),imshow(a),title('Original');
+subplot(1,2,2),imshow(ad),title('Erosion Image');
+
+Practical 8.B: Image Erosion
+a=imread(path)
+se = testmatrix('square',11);
+ae = imerode(a,se);
+subplot(1,2,1),imshow(a),title('Original');
+subplot(1,2,2),imshow(ae),title('Erosion Image');
+
+Practical 8.C: Image Opening
+a=imread(path)
+se = testmatrix('square',11);
+e = imerode(a,se);
+od = imdilate(e,se);
+subplot(1,2,1),imshow(a),title('orignal image');
+subplot(1,2,2),imshow(od),title('opening image');
+
+Practical 8.D: Image Closing
+a=imread(path)
+se=testmatrix('square',11);
+d=imdilate(a,se);
+ce=imerode(d,se);
+subplot(1,2,1),imshow(a),title('Original Image');
+subplot(1,2,2),imshow(ce),title('Closed Image')
